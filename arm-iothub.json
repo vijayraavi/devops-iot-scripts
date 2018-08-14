@@ -43,10 +43,7 @@
               },
               "enableFileUploadNotifications": false,
               "features": "None"
-          },
-          "dependsOn": [
-              "[resourceId('Microsoft.EventHub/namespaces', variables('eventhubNamespace'))]"
-          ]
+          }
       }
   ]
 }
