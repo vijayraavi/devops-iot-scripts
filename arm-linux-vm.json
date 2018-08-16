@@ -40,7 +40,13 @@
       "metadata": {
         "description": "Password for the Virtual Machine."
       }
-    }
+    },
+    "edgeDeviceConnectionString": {
+      "type": "string",
+      "metadata": {
+        "description": "Device connection string for edge device"
+      }
+    },
   },
   "variables": {
     "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'savm')]",
@@ -91,6 +97,22 @@
           }]
         }
       },
+      "resources": [{
+        "name": "[concat(parameters('virtualMachineName'), '/', variables('customScriptExtension'))]",
+        "type": "Microsoft.Compute/virtualMachines/extensions",
+        "location": "[parameters('location')]",
+        "apiVersion": "2015-06-15",
+        "dependsOn": ["[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"],
+        "properties": {
+          "publisher": "Microsoft.Compute",
+          "type": "CustomScriptExtension",
+          "typeHandlerVersion": "1.9",
+          "autoUpgradeMinorVersion": true,
+          "protectedSettings": {
+            "commandToExecute": "[concat('curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > ./microsoft-prod.list && cp ./microsoft-prod.list /etc/apt/sources.list.d/ && curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && cp ./microsoft.gpg /etc/apt/trusted.gpg.d/ && apt-get update && apt-get install -y moby-engine && apt-get install -y moby-cli && apt-get install -y iotedge && sed -i.bak \"s/device_connection_string:.*$/device_connection_string: \"', parameters('edgeDeviceConnectionString'), '\"/\" /etc/iotedge/config.yaml && systemctl restart iotedge')]"
+          }
+        }
+      }],
       "dependsOn": [
         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
       ]
