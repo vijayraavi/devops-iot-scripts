@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+      "registryName": {
+          "type": "String",
+          "metadata": {
+              "description": "The name of the container registry."
+          }
+      },
+      "registryLocation": {
+          "type": "String",
+          "metadata": {
+              "description": "The location of the container registry. This cannot be changed after the resource is created."
+          }
+      },
+      "registrySku": {
+          "defaultValue": "Standard",
+          "type": "String",
+          "metadata": {
+              "description": "The SKU of the container registry."
+          }
+      }
+  },
+  "resources": [
+      {
+          "type": "Microsoft.ContainerRegistry/registries",
+          "sku": {
+              "name": "[parameters('registrySku')]"
+          },
+          "name": "[parameters('registryName')]",
+          "apiVersion": "2017-10-01",
+          "location": "[parameters('registryLocation')]",
+          "properties": {
+              "adminUserEnabled": false
+          }
+      }
+  ]
+}
