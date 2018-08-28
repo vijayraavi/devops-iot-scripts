@@ -19,9 +19,7 @@
       }
   },
   "variables": {
-      "resourceLocation": "[resourceGroup().location]",
-      "iotHubResourceId": "[resourceId('Microsoft.Devices/Iothubs', parameters('iotHubName'))]",
-      "iotHubKeyResource": "[resourceId('Microsoft.Devices/Iothubs/Iothubkeys', parameters('iotHubName'), 'iothubowner')]"
+      "resourceLocation": "[resourceGroup().location]"
   },
   "resources": [
       {
