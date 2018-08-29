@@ -7,5 +7,5 @@ apt-get update
 apt-get install -y moby-engine
 apt-get install -y moby-cli
 apt-get install -y iotedge
-sed -i.bak "s/device_connection_string:.*$/device_connection_string: \"$1\"/" /etc/iotedge/config.yaml
+sed -i.bak "s|device_connection_string:.*$|device_connection_string: \"$1\"|" /etc/iotedge/config.yaml
 systemctl restart iotedge
