@@ -1,6 +1,6 @@
 #!/bin/sh
 # Or it will block next scripts.
-DEBIAN_FRONTEND=noninteractive
+export DEBIAN_FRONTEND="noninteractive"
 echo "TEST" >> /home/zhqqi/test
 curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > ./microsoft-prod.list
 cp ./microsoft-prod.list /etc/apt/sources.list.d/
