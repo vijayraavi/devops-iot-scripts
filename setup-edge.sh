@@ -1,4 +1,6 @@
 #!/bin/sh
+# If parameter doesn't exist or empty (not first time deploy), then do not do setup work
+if [ ! -z "$1" ]; then
 # Or it will block next scripts.
 export DEBIAN_FRONTEND="noninteractive"
 curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > ./microsoft-prod.list
@@ -11,3 +13,4 @@ apt-get install -y moby-cli
 apt-get install -y iotedge || true
 sed -i.bak "s|device_connection_string:.*$|device_connection_string: \"$1\"|" /etc/iotedge/config.yaml
 systemctl restart iotedge || (sleep 5 && systemctl restart iotedge)
+fi
