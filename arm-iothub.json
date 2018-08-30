@@ -39,8 +39,8 @@
                       "partitionCount": 2
                   },
                   "operationsMonitoringEvents": {
-                    "retentionTimeInDays": "1",
-                    "partitionCount": "1"
+                    "retentionTimeInDays": 1,
+                    "partitionCount": 2
                   }
               },
               "enableFileUploadNotifications": false,
