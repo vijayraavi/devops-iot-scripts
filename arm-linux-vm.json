@@ -109,7 +109,7 @@
           "typeHandlerVersion": "2.0",
           "autoUpgradeMinorVersion": true,
           "settings": {
-            "fileUris": ["https://raw.githubusercontent.com/michaeljqzq/devops-iot-sample/arm/setup-edge.sh"]
+            "fileUris": ["https://raw.githubusercontent.com/Azure-Samples/devops-iot-scripts/arm/setup-edge.sh"]
           },
           "protectedSettings": {
             "commandToExecute": "[concat('sudo sh setup-edge.sh \"', parameters('edgeDeviceConnectionString'), '\"')]"
