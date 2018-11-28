@@ -10,6 +10,8 @@ cp ./microsoft.gpg /etc/apt/trusted.gpg.d/
 apt-get update
 apt-get install -y moby-engine
 apt-get install -y moby-cli
-apt-get install -y iotedge || true
-sed -i.bak "s|device_connection_string:.*$|device_connection_string: \"$1\"|" /etc/iotedge/config.yaml && systemctl restart iotedge || (sleep 5 && systemctl restart iotedge)
+apt-get install -y iotedge
+echo "replace connection string..." && sed -i.bak "s|device_connection_string:.*$|device_connection_string: \"$1\"|" /etc/iotedge/config.yaml
+sleep 10 && cat /etc/iotedge/config.yaml
+(echo "restart iotedge..." && systemctl restart iotedge) || (echo "restart iotedge second time after 5 seconds..." && sleep 5 && systemctl restart iotedge)
 fi
