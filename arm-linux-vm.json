@@ -119,11 +119,7 @@
             "type": "CustomScript",
             "typeHandlerVersion": "2.0",
             "autoUpgradeMinorVersion": true,
-            "settings": {
-              "fileUris": {
-                "value": []
-              }
-            },
+            "settings": {},
             "protectedSettings": {
               "commandToExecute": "[concat('sudo sh /etc/iotedge/configedge.sh \"', parameters('edgeDeviceConnectionString'), '\"')]"
             }
